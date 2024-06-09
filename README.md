@@ -1,4 +1,3 @@
-```
 # Subscription-Management-Software
 
 ## Overview
@@ -43,7 +42,6 @@ Before you begin, ensure you have the following installed on your local machine:
 ```bash
 git clone https://github.com/dsvasudev19/Subscription-Management-Software.git
 cd Subscription-Management-Software
-```
 
 ### Install Dependencies
 
