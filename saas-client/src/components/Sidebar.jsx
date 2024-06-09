@@ -9,18 +9,15 @@ export default function Component() {
     <Sidebar aria-label="Default sidebar example">
       <Sidebar.Items>
         <Sidebar.ItemGroup>
-          <Sidebar.Item href="/" icon={HiChartPie}>
+          <Sidebar.Item href="/admin/" icon={HiChartPie}>
             Dashboard
           </Sidebar.Item>
          
-          <Sidebar.Item href="#" icon={HiUser}>
+          <Sidebar.Item href="/admin/users" icon={HiUser}>
             Users
           </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiShoppingBag}>
+          <Sidebar.Item href="/admin/plans" icon={HiShoppingBag}>
             Plans
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiArrowSmRight}>
-           Admins
           </Sidebar.Item>
           <Sidebar.Item href="#" icon={HiTable}>
             SignOut

@@ -4,6 +4,7 @@ import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../axiosInstance";
 import { useAuth } from "../AuthContext";
+import axios from "axios";
 
 export default function Component() {
   const [user,setUser]=useState()
@@ -15,17 +16,15 @@ export default function Component() {
   });
 
   const loginUser=async()=>{
+
     try {
       if(details.email && details.password){
         console.log("executing user")
-        const res=await axiosInstance.post("/auth/login",details);
+        
+        const res=await axios.post("http://localhost:3000/admin/auth/login",details);
        if(res.status===200){
-        localStorage.setItem("user",JSON.stringify(res.data.data.user))
-        if(res.data.data.user.type==="Admin"){
-           window.location.href="/admin-home"
-        }else{
-          window.location.href="/home"
-        }
+        localStorage.setItem("admin",JSON.stringify(res.data.data.user))
+        window.location.href="/admin-home"
        }
       }else{
         setError("Please fill all details")

@@ -54,7 +54,7 @@ const Home = () => {
           <div className="items-center text-center">
           <h2 className="mt-12 text-3xl">To View Pricing, Please Click the Button below</h2>
           <h1 className="mt-3">👇</h1>
-          <button className="bg-cyan-700 mt-6">View Pricing</button>
+          <a href="/pricing"><button className="bg-cyan-700 mt-6">View Pricing</button></a>
           </div>
           </div>
         </div>

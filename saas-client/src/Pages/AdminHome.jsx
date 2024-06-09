@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from './../components/Footer'
 import Header from './../components/Header'
 const Home=()=>{
+  const [user,setUser]=useState()
     const checkUser=()=>{
         try {
           const userString=localStorage.getItem("user");
@@ -10,7 +11,6 @@ const Home=()=>{
             const userObject=JSON.parse(userString);
             setUser(userObject);
             window.location.href="/admin-home"
-
           }else{
             window.location.href="/login"
             
@@ -20,12 +20,13 @@ const Home=()=>{
         }
       }
 
-      useEffect(()=>{
-        checkUser();
-      },[])
+      // useEffect(()=>{
+      //   checkUser();
+      // },[])
 
     return (
         <div>
+            <Header />
             <div className="flex justify-center">
             <h1>You are now logged in as a Admin</h1>
             </div>

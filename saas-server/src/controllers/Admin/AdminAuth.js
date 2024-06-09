@@ -5,14 +5,16 @@ const login=async(req,res,next)=>{
     try {
         const admin=await Admin.findOne({
             where:{
-                email
+                email:req.body.email
             }
         })
         if(admin){
             const isTrue=bcrypt.compareSync(req.body.password,admin.password)
             if(isTrue){
                 return res.status(200).json({
-                    success:true,message:"Successfully Logged in the Admin"
+                    success:true,message:"Successfully Logged in the Admin",data:{
+                        user:admin,
+                    }
                 })
             }else{
                 return res.status(401).json({

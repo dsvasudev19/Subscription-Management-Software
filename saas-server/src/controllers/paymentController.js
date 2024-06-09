@@ -1,5 +1,4 @@
-
-const instance=require("./../utils/razorpay")
+const instance=require("../utils/razorpay")
 const {Transaction}=require("./../models")
 
 const createOrder=async(req,res,next)=>{
@@ -8,7 +7,7 @@ const createOrder=async(req,res,next)=>{
             amount: req.body.amount,  
             currency: "INR",
           };
-        //   const {amount,currency}=req.body;
+          console.log("create order controller")
         instance.orders.create(options, function(err, order) {
             if(!err){
                 return res.status(200).json({success:true,message:"Successfully Created an Payment Order",data:order})

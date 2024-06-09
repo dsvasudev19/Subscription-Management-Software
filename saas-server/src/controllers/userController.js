@@ -1,27 +1,36 @@
 const { User, Subscription } = require("../models");
 const bcrypt = require("bcrypt");
+const {Op} =require("sequelize")
 
 const createUser = async (req, res) => {
   try {
-    const { username, email } = req.body;
+    const { name, email } = req.body;
+    const adminId=req.body.adminId;
+    const admin=await User.findByPk(adminId);
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ error: "User already exists" });
     }
     const randomPassword = Math.random().toString(36).slice(-8);
-    const hashedPassword = await bcrypt.hash(randomPassword, 10);
+    const hashedPassword = await bcrypt.hash("demo", 10);
     const newUser = await User.create({
-      username,
+      name,
       email,
       password: hashedPassword,
     });
-    if (req.user.role === "Admin") {
+    if (admin.role === "Admin") {
       const subscription = await Subscription.findOne({
-        where: { userId: req.user.id },
+        where: { userId: admin.id,count:{
+          [Op.gt]:0
+        } },
       });
-      await subscription.decrement("count", { by: 1 });
+      if(subscription){
+        await subscription.decrement("count", { by: 1 });
+      }else{
+        return res.status(400).json({success:false,message:"Your Subscription limit has expired"})
+      }
     }
-    res.status(201).json({ newUser, randomPassword });
+    res.status(201).json({ success:true,message:"Successfully created new user",newUser, randomPassword });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -67,12 +76,12 @@ const deleteUser = async (req, res) => {
 const getUsers = async (req, res, next) => {
   try {
     let users = [];
-    if (req.user.role === "SuperAdmin") {
+    // if (req.user.role === "SuperAdmin") {
+    //   users = await User.findAll();
+    // } else {
       users = await User.findAll();
-    } else {
-      users = await User.findAll({ where: { role: "User" } });
-    }
-    res.status(200).json({ success: true, message: "Users found successfully", users });
+    // }
+    res.status(200).json({ success: true, message: "Users found successfully", data:users });
   } catch (error) {
     next(error);
   }

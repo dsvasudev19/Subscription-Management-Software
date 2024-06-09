@@ -4,7 +4,7 @@ const Header = () => {
    const [user,setUser]=useState();
    const checkUser=()=>{
     try {
-      const userString=localStorage.getItem("user");
+      const userString=localStorage.getItem("admin");
       if(userString.length>0){
         const userObject=JSON.parse(userString);
         console.log(userObject);
@@ -43,8 +43,8 @@ const Header = () => {
           {
             user && <button
             onClick={()=>{
-              localStorage.removeItem("user");
-              window.location.href="/login"
+              localStorage.removeItem("admin");
+              window.location.href="/admin/login"
             }}
           type="button"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

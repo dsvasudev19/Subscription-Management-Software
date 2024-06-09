@@ -17,14 +17,15 @@ export default function Component() {
     try {
       if(details.email && details.password){
         console.log("executing user")
-        const res=await axiosInstance.post("/auth/login",details);
+        const res=await axiosInstance.post("/api/auth/login",details);
+        console.log(res);
        if(res.status===200){
-        localStorage.setItem("user",JSON.stringify(res.data.data.user))
-        if(res.data.data.user.type==="Admin"){
-           window.location.href="/admin-home"
-        }else{
-          window.location.href="/home"
-        }
+        // localStorage.setItem("user",JSON.stringify(res.data.data.user))
+        // if(res.data.data.user.type==="Admin"){
+        //    window.location.href="/admin-home"
+        // }else{
+        //   window.location.href="/home"
+        // }
        }
       }else{
         setError("Please fill all details")

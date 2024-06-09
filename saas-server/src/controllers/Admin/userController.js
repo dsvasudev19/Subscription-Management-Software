@@ -5,7 +5,7 @@ const userController = {
     getAll: async (req, res) => {
         try {
             const users = await User.findAll();
-            res.status(200).json(users);
+            res.status(200).json({success:true,message:"Successfully fetched the user details",data:users});
         } catch (error) {
             res.status(500).json({ message: "Error retrieving users", error });
         }
@@ -16,9 +16,9 @@ const userController = {
             const { id } = req.params;
             const user = await User.findByPk(id);
             if (user) {
-                res.status(200).json(user);
+                res.status(200).json({success:true,message:"Successfully fetched the user details",data:user});
             } else {
-                res.status(404).json({ message: "User not found" });
+                res.status(404).json({success:false, message: "User not found" });
             }
         } catch (error) {
             res.status(500).json({ message: "Error retrieving user", error });
@@ -29,7 +29,7 @@ const userController = {
         try {
             const { name, email, password } = req.body;
             const newUser = await User.create({ name, email, password });
-            res.status(201).json(newUser);
+            res.status(201).json({success:true,message:"Successfully Created the user"});
         } catch (error) {
             res.status(500).json({ message: "Error creating user", error });
         }
@@ -42,7 +42,7 @@ const userController = {
             const user = await User.findByPk(id);
             if (user) {
                 await user.update({ name, email, password });
-                res.status(200).json(user);
+                res.status(200).json({success:true,message:"Successfully Updated the user",data:user});
             } else {
                 res.status(404).json({ message: "User not found" });
             }
@@ -51,18 +51,19 @@ const userController = {
         }
     },
 
-    delete: async (req, res) => {
+    delete: async (req, res,next) => {
         try {
             const { id } = req.params;
             const user = await User.findByPk(id);
             if (user) {
                 await user.destroy();
-                res.status(204).json();
+                return res.status(200).json({success:true,message:"Successfully deleted the user"});
             } else {
-                res.status(404).json({ message: "User not found" });
+                return res.status(404).json({ message: "User not found" });
             }
         } catch (error) {
-            res.status(500).json({ message: "Error deleting user", error });
+            console.log(error)
+            next(error);
         }
     }
 };

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 const PriceCard = () => {
-
+  
 
 
     function loadScript(src) {
@@ -42,7 +42,7 @@ const PriceCard = () => {
     
     
         const options = {
-          key: "rzp_live_KVuJ5RLTRk9YKQ",
+          key: "rzp_test_RuUV4roXxFjO0I",
           amount: 2500 * 100,
           currency: 'INR',
           name: "Darse Shikari Vasudev",
@@ -58,12 +58,12 @@ const PriceCard = () => {
             const result = await axios.post("http://localhost:3000/payment/success", data);
           },
           prefill: {
-            name: "Soumya Dey",
-            email: "SoumyaDey@example.com",
+            name: "",
+            email: "",
             contact: "9999999999",
           },
           notes: {
-            address: "Soumya Dey Corporate Office",
+            address: "",
           },
           theme: {
             color: "#61dafb",

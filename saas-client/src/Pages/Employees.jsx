@@ -9,10 +9,11 @@ const Employees = () => {
 
   const getEmployees = async () => {
     try {
-      const res = await axiosInstance.get("/employee/");
+      const res = await axiosInstance.get("/api/user/");
       console.log(res);
       if (res.status === 200) {
-        setEmployees(res.data.data);
+        // console.log(res)
+        setEmployees(res.data.data)
       }
     } catch (error) {
       console.log(error);
@@ -67,9 +68,9 @@ const Employees = () => {
         }
       }
 
-      useEffect(()=>{
-        checkUser();
-      },[])
+      // useEffect(()=>{
+      //   checkUser();
+      // },[])
   return (
     <div class="w-full">
       <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -77,14 +78,12 @@ const Employees = () => {
           <tr>
            
             <th scope="col" class="px-6 py-3">
-              First Name
+               Id
             </th>
             <th scope="col" class="px-6 py-3">
-              Last Name
+               Name
             </th>
-            <th scope="col" class="px-6 py-3">
-              Father Name
-            </th>
+            
             
             <th scope="col" class="px-6 py-3">
               Email
@@ -94,7 +93,7 @@ const Employees = () => {
             </th>
          
             <th scope="col" class="px-6 py-3">
-              Date of Birth
+             Role
             </th>
             <th scope="col" class="px-6 py-3">
               Actions
@@ -112,12 +111,10 @@ const Employees = () => {
                   >
                     {emp.id}
                   </th>
-                  <td class="px-6 py-4">{emp.first_name}</td>
-                  <td class="px-6 py-4">{emp.last_name}</td>
-                  <td class="px-6 py-4">{emp?.father_name}</td>
-                  <td class="px-3 py-4">{emp?.email}</td>
-                  <td class="px-2 py-4">{emp?.phone}</td>
-                  <td className="px-2 py-4">{emp.dob}</td>
+                  <td class="px-6 py-4">{emp.name}</td>
+                  <td class="px-6 py-4">{emp.email}</td>
+                  <td class="px-6 py-4">{emp?.phone}</td>
+                  <td class="px-3 py-4">{emp?.role}</td>
                   <td class="px-6 py-4 text-center">
                     <a
                       href="#"
