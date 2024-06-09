@@ -89,7 +89,7 @@ cd ../saas-client
 yarn dev
 ```
 
-The client application should now be running on [http://localhost:3000](http://localhost:3000) (or another port specified by Vite).
+The client application should now be running on [http://localhost:5173](http://localhost:5173) (or another port specified by Vite).
 
 ### Running the Server
 
